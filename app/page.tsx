@@ -1,66 +1,66 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useAuth, useUser, UserButton } from '@clerk/nextjs';
+import Icon from '@mdi/react';
+import { 
+  mdiLogin, 
+  mdiAccountPlus, 
+  mdiViewDashboard,
+  mdiHomeCircle,
+  mdiSword
+} from '@mdi/js';
+
+export default function Page() {
+  const { isLoaded, isSignedIn } = useUser();
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <section className="w-full box-border flex flex-col items-center justify-center p-4">
+      <video className="pb-8" width={512} height={512} autoPlay loop playsInline muted>
+        <source src="/tk/tksword.mp4" type="video/mp4" />
+      </video>
+      <div className="w-full h-max flex flex-col items-center justify-center text-center">
+        <div className="pb-4">
+          <p className="text-3xl font-bold">rpgtoolkit.net</p>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="pb-4">
+          <p className="text-sm font-medium">A free and open-source toolkit with 2D, 2.5D and 3D capabilities</p>
         </div>
-      </main>
-    </div>
-  );
+      </div>
+      {!isLoaded && !isSignedIn && (
+        <div className="w-full box-border flex flex-col justify-center items-center gap-4">
+          <Image src="/tk/core/loading-edited.gif" width={30} height={30} alt="Loading..." />
+        </div>
+      )}
+      {isLoaded && isSignedIn && (
+        <div className="flex flex-row justify-center gap-8 p-4">
+          <UserButton />
+          <div>
+            <Link href="/home" className="flex flex-row gap-2 bg-white p-2 hover:text-white hover:bg-black">
+              <Icon path={mdiSword} title="Toolkit Homepage" size={1} rotate={225}/>
+              <p className="text-medium font-medium">Home</p>
+            </Link>
+          </div>
+        </div>
+      )}
+      {isLoaded && !isSignedIn && (
+      <div className="flex flex-row justify-center gap-8 p-4">
+        <div className="p-2 bg-white hover:text-white hover:bg-black">
+          <Link href="/sign-in" className="flex flex-row gap-2  text-medium font-medium">
+            <Icon path={mdiLogin} title="Sign In" size={1}/>
+            Sign In
+          </Link>
+        </div>
+        <div className=" bg-white p-2 hover:text-white hover:bg-black">
+          <Link href="/sign-up" className="flex flex-row gap-2 text-medium font-medium">
+            <Icon path={mdiAccountPlus} title="Sign Up" size={1}/>
+            Sign Up 
+          </Link>
+        </div>
+      </div>
+      )}
+    </section>
+  )
 }
