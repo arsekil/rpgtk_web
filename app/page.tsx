@@ -3,13 +3,11 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useAuth, useUser, UserButton } from '@clerk/nextjs';
+import { useUser } from '@clerk/nextjs';
 import Icon from '@mdi/react';
 import { 
   mdiLogin, 
-  mdiAccountPlus, 
-  mdiViewDashboard,
-  mdiHomeCircle,
+  mdiAccountPlus,
   mdiSword
 } from '@mdi/js';
 
@@ -31,12 +29,11 @@ export default function Page() {
       </div>
       {!isLoaded && !isSignedIn && (
         <div className="w-full box-border flex flex-col justify-center items-center gap-4">
-          <Image src="/tk/core/loading-edited.gif" width={30} height={30} alt="Loading..." />
+          <Image src="/tk/core/loading-edited.gif" width={30} height={30} alt="Loading..." unoptimized />
         </div>
       )}
       {isLoaded && isSignedIn && (
         <div className="flex flex-row justify-center gap-8 p-4">
-          <UserButton />
           <div>
             <Link href="/home" className="flex flex-row gap-2 bg-white p-2 hover:text-white hover:bg-black">
               <Icon path={mdiSword} title="Toolkit Homepage" size={1} rotate={225}/>

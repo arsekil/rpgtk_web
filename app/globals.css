@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
-:root {
-  --color-selected-bg: #273948;
-  --color-selected-arrow: #48667f;
+@theme {
+  --color-menu-selected-bg: #324d63;
+  --color-blurb-selected-bg: #273948;
+  --color-blurb-selected-arrow: #48667f;
 }
