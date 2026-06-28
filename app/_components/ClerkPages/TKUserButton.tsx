@@ -17,13 +17,13 @@ export default function TKUserButton() {
     return (
         <div id="tkuserbutton">
              <UserButton>
-                <UserButton.UserProfilePage label="My Games" url="/mygames" labelIcon={<Icon path={mdiNintendoGameBoy} size={.7}/>}>
+                <UserButton.UserProfilePage label="My Games" url="/mygames" labelIcon={<Icon path={mdiNintendoGameBoy} size={.6}/>}>
                   <MyGames />
                 </UserButton.UserProfilePage>
-                <UserButton.UserProfilePage label="My Assets" url="/myassets" labelIcon={<Icon path={mdiFileDocumentOutline} size={.7}/>}>
+                <UserButton.UserProfilePage label="My Assets" url="/myassets" labelIcon={<Icon path={mdiFileDocumentOutline} size={.6}/>}>
                   <MyAssets />
                 </UserButton.UserProfilePage>
-                <UserButton.UserProfilePage label="My Extensions" url="/myextensions" labelIcon={<Icon path={mdiPuzzleOutline} size={.7}/>}>
+                <UserButton.UserProfilePage label="My Extensions" url="/myextensions" labelIcon={<Icon path={mdiPuzzleOutline} size={.6}/>}>
                   <MyExtensions />
                 </UserButton.UserProfilePage>
               </UserButton>

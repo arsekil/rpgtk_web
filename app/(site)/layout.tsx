@@ -31,8 +31,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div id="home" className={` ${Verdana.className} bg-[url('/tk/core/bkg.png')] bg-repeat min-h-screen flex items-center justify-center`}>
-      <div id="container" className="relative z-2 w-237.5 h-200 my-0 mx-auto mt-2.5 bg-black flex flex-col items-center justify-items-start">
+    <div
+      id="home"
+      className={` ${Verdana.className} bg-[url('/tk/core/bkg.png')] bg-repeat min-h-screen flex items-center justify-center`}
+    >
+      <div
+        id="container"
+        className="relative z-2 w-237.5 h-200 my-0 mx-auto mt-2.5 bg-black flex flex-col items-center justify-items-start"
+      >
         <Header />
         {children}
       </div>
