@@ -1,8 +1,10 @@
-import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 // import Image from "next/image";
 
-import type { Metadata } from "next";
+import Features from "./Features";
+import Content from "./Content";
+
 export const metadata: Metadata = {
   title: "RPG Toolkit > Home",
   description: "RPG Toolkit Homepage",
@@ -31,7 +33,17 @@ export default function Page() {
         className="absolute right-1.5 top-38.25 w-80 h-20 flex justify-center items-center"
       >
         {/*TODO: add RPG Toolkit version4(5) logo here*/}
+        {/* <Image
+          src={"/tk/rpgtoolkit.png"}
+          width={322}
+          height={78}
+          alt={"RPG Toolkit Download"}
+          loading="eager"
+          className="aspect-322/78"
+        /> */}
       </div>
+      <Features />
+      <Content />
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function Menu() {
       {menuItems.map((item) => (
         <div
           key={item.href}
-          className={`p-2 pb-0 rounded-t-xl ${pathname === item.href ? "bg-menu-selected-bg" : ""}`}
+          className={`p-2 pb-0 rounded-t-xl ${pathname === item.href ? "bg-menu-selected-bg" : "transition-colors ease-in-out duration-300 hover:bg-menu-selected-bg"}`}
         >
           <Link
             href={item.href}
