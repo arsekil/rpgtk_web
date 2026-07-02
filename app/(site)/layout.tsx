@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Header from "../_components/Header/Header";
+import Footer from "../_components/Footer/Footer";
+import Tidbit from "../_components/Tidbit/Tidbit";
 import localFont from "next/font/local";
 
 const Verdana = localFont({
@@ -33,15 +35,17 @@ export default function RootLayout({
   return (
     <div
       id="home"
-      className={` ${Verdana.className} bg-[url('/tk/core/bkg.png')] bg-repeat min-h-screen flex items-center justify-center`}
+      className={` ${Verdana.className} bg-[url('/tk/core/bkg.png')] bg-repeat min-h-screen flex flex-col items-center justify-center gap-4`}
     >
       <div
         id="container"
-        className="relative z-2 w-237.5 h-200 my-0 mx-auto mt-2.5 bg-black flex flex-col items-center justify-items-start"
+        className="relative z-2 w-237.5 h-200 my-0 mx-auto mt-2.5 bg-black flex flex-col items-center justify-items-start justify-between"
       >
         <Header />
         {children}
+        <Footer />
       </div>
+      <Tidbit />
     </div>
   );
 }
