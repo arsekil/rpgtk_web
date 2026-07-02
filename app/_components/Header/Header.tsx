@@ -13,7 +13,7 @@ import TKUserButton from "@/app/_components/ClerkPages/TKUserButton";
 
 export default function Header() {
   return (
-    <div
+    <header
       id="header"
       className="relative w-full h-52.5 bg-[url('/tk/core/2.jpg')] bg-no-repeat bg-center bg-cover"
     >
@@ -22,7 +22,7 @@ export default function Header() {
         className="absolute w-full position top-0 right-0 left-0 h-16 bg-[url('/tk/core/bar-bkg.png')] flex flex-row justify-between items-center"
       >
         <div id="logo" className="pt-4 pl-4 w-52 h-16">
-          <Link href="/home">
+          <Link href="/">
             <Image
               src="/tk/logo.png"
               alt="RPGToolkit Logo"
@@ -63,6 +63,6 @@ export default function Header() {
       >
         <Menu />
       </div>
-    </div>
+    </header>
   );
 }

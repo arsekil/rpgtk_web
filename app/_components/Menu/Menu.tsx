@@ -12,6 +12,7 @@ const menuItems = [
   { label: "tutorials", href: "/tutorials/latest" },
   { label: "games", href: "/games/latest" },
   { label: "devlog", href: "/devlog/feed" },
+  { label: "forum", href: "/community" },
 ];
 
 export default function Menu() {
