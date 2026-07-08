@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClientProvider from "./_components/ConvexClientProvider/ConvexClientProvider";
 import "./globals.css";
-import localFont  from "next/font/local";
+import localFont from "next/font/local";
 
 const OpenSans = localFont({
   src: [
@@ -34,13 +34,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${OpenSans.className}`}>
-        <body className="overflow-auto">
+      <body className="overflow-auto">
         <ClerkProvider>
-          <ConvexClientProvider>
-            {children}
-          </ConvexClientProvider>
+          <ConvexClientProvider>{children}</ConvexClientProvider>
         </ClerkProvider>
-        </body>
-      </html>
+      </body>
+    </html>
   );
 }
