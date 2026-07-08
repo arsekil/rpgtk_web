@@ -17,6 +17,7 @@ export default defineSchema({
     title: v.string(),
     description: v.string(),
     content: v.string(),
+    image: v.id("_storage"),
     author: v.id("users"),
     updatedAt: v.optional(v.number()),
   }),
