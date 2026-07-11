@@ -1,8 +1,8 @@
 import { Id } from "./_generated/dataModel";
-import { internalMutation, MutationCtx } from "./_generated/server";
+import { mutation, MutationCtx } from "./_generated/server";
 import { v } from "convex/values";
 
-export const createUser = internalMutation({
+export const createUser = mutation({
   args: {
     clerkId: v.string(),
     nickname: v.string(),
@@ -22,15 +22,18 @@ export const createUser = internalMutation({
       updatedAt?: number;
     },
   ) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (identity === null) {
-      throw new Error("Unauthenticated call to `createUser` mutation.");
+    const existing = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", args.clerkId))
+      .unique();
+    if (existing !== null) {
+      return existing._id;
     }
     return await ctx.db.insert("users", args);
   },
 });
 
-export const generateUploadUrl = internalMutation({
+export const generateUploadUrl = mutation({
   args: {},
   handler: async (ctx: MutationCtx) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -41,7 +44,7 @@ export const generateUploadUrl = internalMutation({
   },
 });
 
-export const addFeatures = internalMutation({
+export const addFeatures = mutation({
   args: {
     title: v.string(),
     description: v.string(),

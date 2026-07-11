@@ -10,7 +10,10 @@ export default function SignUpPage() {
         justifyContent: "center",
       }}
     >
-      <SignUp forceRedirectUrl="/setup" />
+      <SignUp
+        forceRedirectUrl="/setup"
+        unsafeMetadata={{ setupCompleted: false }}
+      />
     </div>
   );
 }

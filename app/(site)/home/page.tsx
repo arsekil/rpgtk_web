@@ -29,11 +29,11 @@ export default function Page() {
       </div>
       <div
         id="home-rpgtoolkit"
-        className="absolute right-1.5 top-38.25 w-80 h-20 flex justify-center items-center"
+        className="absolute right-1.5 top-38.25 w-80.5 h-19.5 flex justify-center items-center"
       >
         {/*TODO: add RPG Toolkit version4(5) logo here*/}
         <Image
-          src="/tk/rpgtoolkit_transparent3.png"
+          src="/tk/rpgtoolkit.png"
           alt="RPG Toolkit Logo"
           width={322}
           height={78}

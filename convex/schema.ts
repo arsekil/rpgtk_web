@@ -10,7 +10,7 @@ export default defineSchema({
     avatarStorageId: v.optional(v.id("_storage")),
     updatedAt: v.optional(v.number()),
   })
-    .index("by_clerk_id", ["clerkId"])
+    .index("by_clerkId", ["clerkId"])
     .index("by_email", ["email"]),
 
   features: defineTable({
