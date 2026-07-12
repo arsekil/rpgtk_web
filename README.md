@@ -7,7 +7,7 @@
 1. React
 2. NextJS
 3. TailwindCSS
-4. Clerk
+4. Kinde-OSS
 5. MDI Icons
 6. Convex DB
 7. Zod

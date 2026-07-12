@@ -4,7 +4,7 @@ import { v } from "convex/values";
 
 export const createUser = mutation({
   args: {
-    clerkId: v.string(),
+    kindeId: v.string(),
     nickname: v.string(),
     email: v.string(),
     bio: v.optional(v.string()),
@@ -14,7 +14,7 @@ export const createUser = mutation({
   handler: async (
     ctx: MutationCtx,
     args: {
-      clerkId: string;
+      kindeId: string;
       nickname: string;
       email: string;
       bio?: string;
@@ -24,7 +24,7 @@ export const createUser = mutation({
   ) => {
     const existing = await ctx.db
       .query("users")
-      .withIndex("by_clerkId", (q) => q.eq("clerkId", args.clerkId))
+      .withIndex("by_kindeId", (q) => q.eq("kindeId", args.kindeId))
       .unique();
     if (existing !== null) {
       return existing._id;

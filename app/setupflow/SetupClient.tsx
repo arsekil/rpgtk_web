@@ -3,13 +3,12 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Authenticated, Unauthenticated } from "convex/react";
 
 import { createAccountStep, settingRoleStep } from "./actions";
 
 const stepDefs = [
   { id: "create-account", message: "Creating account" },
-  { id: "user-role", message: "Setting up role" },
+  { id: "user-role", message: "Setting up roles" },
   { id: "user-permission", message: "Setting up permissions" },
   { id: "save-avatar", message: "Saving avatars" },
   { id: "save-data", message: "Saving the data" },
@@ -23,7 +22,7 @@ const stepDefs = [
 /
 */
 
-type StepStatus = "pending" | "done" | "failed";
+type StepStatus = "pending" | "done" | "failed" | "skipped";
 
 export default function SetupClient() {
   const [statuses, setStatuses] = React.useState<Record<string, StepStatus>>(
@@ -38,7 +37,9 @@ export default function SetupClient() {
         const { userId } = await createAccountStep();
         setStatuses((s) => ({ ...s, "create-account": "done" }));
 
-        // await settingRoleStep(userId); setStatuses(...)
+        await settingRoleStep(userId);
+        setStatuses((s) => ({ ...s, "user-role": "done" }));
+
         // await settingPermissionStep(userId); setStatuses(...)
 
         // await saveAvatarStep(userId);
@@ -55,7 +56,7 @@ export default function SetupClient() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Authenticated>
+    <React.Fragment>
       <div
         id="setup"
         className="w-full h-screen flex flex-col items-center justify-center gap-4 text-sm"
@@ -73,7 +74,11 @@ export default function SetupClient() {
                   className={
                     status === "done"
                       ? "w-2 h-2 rounded-full bg-green-700 border border-green-700"
-                      : "w-2 h-2 rounded-full bg-white border"
+                      : status === "failed"
+                        ? "w-2 h-2 rounded-full bg-red-700 border-red-700"
+                        : status === "skipped"
+                          ? "w-2 h-2 rounded-full bg-black border"
+                          : "w-2 h-2 rounded-full bg-white border"
                   }
                 ></div>
                 <div className="w-full">{message}</div>
@@ -91,6 +96,6 @@ export default function SetupClient() {
           />
         </div>
       </div>
-    </Authenticated>
+    </React.Fragment>
   );
 }
