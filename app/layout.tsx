@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
-import ConvexClientProvider from "./_components/ConvexClientProvider/ConvexClientProvider";
+import { AuthProvider } from "./_components/KindeClientProvider/KindeProvider";
+import { ConvexClientProvider } from "./_components/ConvexClientProvider/ConvexClientProvider";
 import "./globals.css";
 import localFont from "next/font/local";
 
@@ -35,9 +35,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${OpenSans.className}`}>
       <body className="overflow-auto">
-        <ClerkProvider>
+        <AuthProvider>
           <ConvexClientProvider>{children}</ConvexClientProvider>
-        </ClerkProvider>
+        </AuthProvider>
       </body>
     </html>
   );

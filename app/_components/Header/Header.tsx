@@ -3,10 +3,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Icon from "@mdi/react";
 import { mdiMagnify } from "@mdi/js";
 import Menu from "@/app/_components/Menu/Menu";
-import TKUserButton from "@/app/_components/ClerkPages/TKUserButton";
 
 // TODO: add dynamically changing background image into "header" - e.g. bg-[url('/tk/core/2.jpg')] bg-no-repeat bg-center bg-cover
 // TODO: add Search input functionality
@@ -37,7 +37,7 @@ export default function Header() {
           id="userbox"
           className="flex justify-center items-center w-10 h-16"
         >
-          <TKUserButton />
+          <LogoutLink>Log Out</LogoutLink>
         </div>
         <div
           id="search"
