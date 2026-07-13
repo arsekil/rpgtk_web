@@ -32,24 +32,13 @@ export default function Page() {
         className="absolute right-1.5 top-38.25 w-80.5 h-19.5 flex justify-center items-center"
       >
         {/*TODO: add RPG Toolkit version4(5) logo here*/}
-        <Image
+        {/* <Image
           src="/tk/rpgtoolkit.png"
           alt="RPG Toolkit Logo"
           width={322}
           height={78}
           priority
-        />
-        {/* <video
-          width={322}
-          height={78}
-          autoPlay
-          loop
-          playsInline
-          muted
-          className="rounded-lg"
-        >
-          <source src={"/tk/rpgtoolkit_animated.mp4"} type="video/mp4" />
-        </video> */}
+        /> */}
       </div>
       <Features />
       <Content />
