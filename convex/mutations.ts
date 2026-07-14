@@ -29,7 +29,8 @@ export const createUser = mutation({
     if (existing !== null) {
       return existing._id;
     }
-    return await ctx.db.insert("users", args);
+    const userId = await ctx.db.insert("users", args);
+    return userId;
   },
 });
 

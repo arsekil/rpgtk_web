@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.13.0",
+    "@kinde/management-api-js": "^0.18.0",
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
     "@tailwindcss/postcss": "^4.3.1",

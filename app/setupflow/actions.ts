@@ -4,6 +4,9 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect, RedirectType } from "next/navigation";
 import { fetchMutation } from "convex/nextjs";
 import { api } from "@/convex/_generated/api";
+import { Users, init } from "@kinde/management-api-js";
+
+init();
 
 export async function createAccountStep() {
   const { getUser } = getKindeServerSession();
@@ -19,7 +22,11 @@ export async function createAccountStep() {
     email: user?.email as string,
   });
 
-  //if (user?.) {}
+  await Users.updateUserProperty({
+    propertyKey: "convexId",
+    userId: user?.id as string,
+    value: convexId as string,
+  });
 
   return { userId: user?.id as string };
 }
