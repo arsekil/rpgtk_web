@@ -35,7 +35,10 @@ export default defineSchema({
     views: v.union(v.number(), v.null()),
     downloads: v.union(v.number(), v.null()),
     likes: v.union(v.number(), v.null()),
-  }),
+  })
+    .index("by_type", ["type"])
+    .index("by_developer", ["developer"])
+    .index("by_likes", ["likes"]),
 
   tutorials: defineTable({
     title: v.string(),
@@ -51,7 +54,10 @@ export default defineSchema({
     published: v.number(),
     reads: v.union(v.number(), v.null()),
     likes: v.union(v.number(), v.null()),
-  }),
+  })
+    .index("by_type", ["type"])
+    .index("by_author", ["author"])
+    .index("by_likes", ["likes"]),
 
   games: defineTable({
     title: v.string(),

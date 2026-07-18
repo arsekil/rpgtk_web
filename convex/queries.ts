@@ -16,3 +16,11 @@ export const getFeatures = query({
     }));
   },
 });
+
+export const getContributionsAggregate = query({
+  args: {},
+  handler: async (ctx: QueryCtx) => {
+    const extensions = ctx.db.query("extensions").collect();
+    const tutorials = ctx.db.query("tutorials").collect();
+  },
+});
