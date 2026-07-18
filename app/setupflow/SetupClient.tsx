@@ -4,25 +4,20 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import { createAccountStep, settingRoleStep } from "./actions";
+import {
+  createAccountStep,
+  settingRolePermissionStep,
+  saveAvatarStep,
+} from "./actions";
 
 const stepDefs = [
   { id: "create-account", message: "Creating account" },
   { id: "user-role", message: "Setting up roles" },
   { id: "user-permission", message: "Setting up permissions" },
-  { id: "save-avatar", message: "Saving avatars" },
-  { id: "save-data", message: "Saving the data" },
+  { id: "save-avatar", message: "Saving avatar" },
 ];
 
-/* 
-/ TODO: 
-/ 
-/ Add a loading state while the user is being created in Clerk and Convex
-/ At each step verify which function has finished running and update the blank dot to green
-/
-*/
-
-type StepStatus = "pending" | "done" | "failed" | "skipped";
+type StepStatus = "pending" | "done" | "failed";
 
 export default function SetupClient() {
   const [statuses, setStatuses] = React.useState<Record<string, StepStatus>>(
@@ -34,20 +29,17 @@ export default function SetupClient() {
   React.useEffect(() => {
     async function run() {
       try {
-        const { userId } = await createAccountStep();
+        const userId = await createAccountStep();
         setStatuses((s) => ({ ...s, "create-account": "done" }));
 
-        await settingRoleStep(userId);
+        await settingRolePermissionStep(userId);
         setStatuses((s) => ({ ...s, "user-role": "done" }));
+        setStatuses((s) => ({ ...s, "user-permission": "done" }));
 
-        // await settingPermissionStep(userId); setStatuses(...)
+        await saveAvatarStep(userId);
+        setStatuses((s) => ({ ...s, "save-avatar": "done" }));
 
-        // await saveAvatarStep(userId);
-        // setStatuses((s) => ({ ...s, "save-avatar": "done" }));
-
-        // await saveDataStep(userId); setStatuses(...)
-
-        //router.push("/home");
+        router.push("/home");
       } catch (error) {
         console.error(error);
       }
@@ -76,9 +68,7 @@ export default function SetupClient() {
                       ? "w-2 h-2 rounded-full bg-green-700 border border-green-700"
                       : status === "failed"
                         ? "w-2 h-2 rounded-full bg-red-700 border-red-700"
-                        : status === "skipped"
-                          ? "w-2 h-2 rounded-full bg-black border"
-                          : "w-2 h-2 rounded-full bg-white border"
+                        : "w-2 h-2 rounded-full bg-white border"
                   }
                 ></div>
                 <div className="w-full">{message}</div>
