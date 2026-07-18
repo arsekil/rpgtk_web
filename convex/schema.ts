@@ -2,7 +2,7 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
-  users: defineTable({
+  kindeUsers: defineTable({
     kindeId: v.string(),
     nickname: v.string(),
     email: v.string(),
@@ -18,7 +18,7 @@ export default defineSchema({
     description: v.string(),
     content: v.string(),
     image: v.id("_storage"),
-    author: v.id("users"),
+    author: v.id("kindeUsers"),
     updatedAt: v.optional(v.number()),
   }),
 
@@ -31,7 +31,7 @@ export default defineSchema({
       v.literal("utility"),
     ),
     description: v.string(),
-    developer: v.id("users"),
+    developer: v.id("kindeUsers"),
     views: v.union(v.number(), v.null()),
     downloads: v.union(v.number(), v.null()),
     likes: v.union(v.number(), v.null()),
@@ -47,7 +47,7 @@ export default defineSchema({
       v.literal("audio"),
     ),
     content: v.string(),
-    author: v.id("users"),
+    author: v.id("kindeUsers"),
     published: v.number(),
     reads: v.union(v.number(), v.null()),
     likes: v.union(v.number(), v.null()),
@@ -56,7 +56,7 @@ export default defineSchema({
   games: defineTable({
     title: v.string(),
     description: v.string(),
-    developerId: v.id("users"),
+    developerId: v.id("kindeUsers"),
     status: v.union(
       v.literal("draft"),
       v.literal("published"),
@@ -112,7 +112,7 @@ export default defineSchema({
       v.literal("games"),
     ),
     parentCommentId: v.optional(v.id("comments")),
-    authorId: v.id("users"),
+    authorId: v.id("kindeUsers"),
     content: v.string(),
     updatedAt: v.optional(v.number()),
   })
@@ -121,7 +121,7 @@ export default defineSchema({
 
   reviews: defineTable({
     gameId: v.id("games"),
-    reviewerId: v.id("users"),
+    reviewerId: v.id("kindeUsers"),
     rating: v.union(v.number(), v.null()),
     content: v.string(),
     createdAt: v.number(),
@@ -136,7 +136,7 @@ export default defineSchema({
       v.literal("tutorials"),
       v.literal("games"),
     ),
-    userId: v.id("users"),
+    userId: v.id("kindeUsers"),
     createdAt: v.number(),
   })
     .index("by_parent", ["parentId", "parentTable"])

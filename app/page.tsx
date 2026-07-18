@@ -74,7 +74,10 @@ export default function Page() {
             </LoginLink>
           </div>
           <div className=" bg-white p-2 hover:text-white hover:bg-black">
-            <RegisterLink className="flex flex-row gap-2 text-medium font-medium">
+            <RegisterLink
+              postLoginRedirectURL="/setupflow"
+              className="flex flex-row gap-2 text-medium font-medium"
+            >
               <Icon path={mdiAccountPlus} title="Sign Up" size={1} />
               Sign Up
             </RegisterLink>

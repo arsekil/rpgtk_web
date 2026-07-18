@@ -23,24 +23,45 @@ export const createUser = mutation({
     },
   ) => {
     const existing = await ctx.db
-      .query("users")
+      .query("kindeUsers")
       .withIndex("by_kindeId", (q) => q.eq("kindeId", args.kindeId))
       .unique();
     if (existing !== null) {
       return existing._id;
     }
-    const userId = await ctx.db.insert("users", args);
+    const userId = await ctx.db.insert("kindeUsers", args);
     return userId;
   },
 });
 
+export const saveAvatar = mutation({
+  args: {
+    userId: v.string(),
+    avatarStorageId: v.id("_storage"),
+  },
+  handler: async (
+    ctx: MutationCtx,
+    args: {
+      userId: string;
+      avatarStorageId?: Id<"_storage">;
+      updatedAt?: number;
+    },
+  ) => {
+    const kindeUser = await ctx.db
+      .query("kindeUsers")
+      .withIndex("by_kindeId", (q) => q.eq("kindeId", args.userId))
+      .unique();
+    await ctx.db.patch("kindeUsers", kindeUser!._id, {
+      avatarStorageId: args.avatarStorageId,
+      updatedAt: Date.now(),
+    });
+  },
+});
+
+// For Features and other imagery uploads
 export const generateUploadUrl = mutation({
   args: {},
   handler: async (ctx: MutationCtx) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (identity === null) {
-      throw new Error("Unauthenticated call to `generateUploadUrl` mutation.");
-    }
     return await ctx.storage.generateUploadUrl();
   },
 });
@@ -51,7 +72,7 @@ export const addFeatures = mutation({
     description: v.string(),
     content: v.string(),
     image: v.id("_storage"),
-    author: v.id("users"),
+    author: v.id("kindeUsers"),
     updatedAt: v.optional(v.number()),
   },
   handler: async (
@@ -61,14 +82,10 @@ export const addFeatures = mutation({
       description: string;
       content: string;
       image: Id<"_storage">;
-      author: Id<"users">;
+      author: Id<"kindeUsers">;
       updatedAt?: number;
     },
   ) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (identity === null) {
-      throw new Error("Unauthenticated call to `addFeatures` mutation.");
-    }
     return await ctx.db.insert("features", args);
   },
 });
